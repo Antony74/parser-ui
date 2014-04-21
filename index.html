@@ -5,15 +5,7 @@
     <script src="lib/codemirror.js"></script>
     <script src="lib/jquery.js"></script>
     <script src="main.js"></script>
-    <style type="text/css">
-      .CodeMirror
-      {
-        border: 1px solid black;
-        font-size: 13px;
-        font-family: monospace;
-        height: 450px;
-      }
-    </style>
+    <link rel="stylesheet" href="index.css">
 </head>
 <body>
     <table width="100%">
@@ -23,6 +15,11 @@
         </td>
         <td width="50%">
             <textarea id="taParseMe"></textarea>
+        </td>
+    </tr>
+    <tr>
+        <td colspan="2">
+            <textarea id="taOutput"></textarea>
         </td>
     </tr>
     </table>

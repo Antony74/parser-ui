@@ -1,0 +1,12 @@
+.SourceEditor
+{
+	border: 1px solid black;
+	height: 450px;
+}
+
+.OutputWindow
+{
+	border: 1px solid black;
+	height: 150px;
+}
+

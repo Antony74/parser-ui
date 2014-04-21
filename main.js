@@ -1,17 +1,22 @@
 $(document).ready(function()
 {
-    var editor1 = CodeMirror.fromTextArea(document.getElementById("taGrammar"), {lineNumbers: true});
-    var editor2 = CodeMirror.fromTextArea(document.getElementById("taParseMe"), {lineNumbers: true});
+    var cmGrammar = CodeMirror.fromTextArea(document.getElementById("taGrammar"), {lineNumbers: true});
+    var cmParseMe = CodeMirror.fromTextArea(document.getElementById("taParseMe"), {lineNumbers: true});
+    var cmOutput  = CodeMirror.fromTextArea(document.getElementById("taOutput"),  {readOnly: true});
 
     $.get("calculator.jison", function(data)
     {
-        editor1.setValue(data);
+        cmGrammar.setValue(data);
     });
 
     $.get("calculator.test", function(data)
     {
-        editor2.setValue(data);
+        cmParseMe.setValue(data);
     });
+
+    $("#taGrammar").next().addClass("SourceEditor");
+    $("#taParseMe").next().addClass("SourceEditor");
+    $("#taOutput").next().addClass("OutputWindow");
 
 });
 
