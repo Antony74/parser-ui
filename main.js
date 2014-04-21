@@ -99,7 +99,7 @@ $(document).ready(function()
         }
         else
         {
-            cmOutput.setValue('Conflicts encountered:<br/>');
+            cmOutput.setValue('Conflicts encountered:\n');
             $("#taOutput").next().addClass('bad');
         }
 
@@ -107,7 +107,7 @@ $(document).ready(function()
         {
             var r = res[2];
             if (!r.bydefault) return;
-            $("#gen_out").append(r.msg+"\n"+"("+r.s+", "+r.r+") -> "+r.action);
+            cmOutput.setValue(cmOutput.getValue() + r.msg+"\n"+"("+r.s+", "+r.r+") -> "+r.action);
         });
 
         parser2 = parser.createParser();
