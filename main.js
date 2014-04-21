@@ -71,13 +71,20 @@ $(document).ready(function()
 
         try
         {
-            var cfg = bnf.parse(grammar);
+            var cfg = JSON.parse(grammar);
         }
-        catch (e)
+        catch(e)
         {
-            cmOutput.setValue("Oops. Make sure your grammar is in the correct format.");
-            $("#taOutput").next().addClass('bad');
-            return;
+            try
+            {
+                var cfg = bnf.parse(grammar);
+            }
+            catch (e)
+            {
+                cmOutput.setValue("Oops. Make sure your grammar is in the correct format.");
+                $("#taOutput").next().addClass('bad');
+                return;
+            }
         }
 
         Jison.print = function () {};
