@@ -1,12 +1,62 @@
 .SourceEditor
 {
 	border: 1px solid black;
-	height: 450px;
+	height: 350px;
 }
 
 .OutputWindow
 {
 	border: 1px solid black;
 	height: 150px;
+}
+
+.Black
+{
+	color: Black;
+}
+
+.Red
+{
+	color: Red;
+}
+
+.Orange
+{
+	color: Orange;
+}
+
+.Yellow
+{
+	color: Yellow;
+}
+
+.Green
+{
+	color: Green;
+}
+
+.Blue
+{
+	color: Blue;
+}
+
+.Indigo
+{
+	color: Indigo;
+}
+
+.Violet
+{
+	color: Violet;
+}
+
+/* From http://zaach.github.io/jison/try/ */
+.good {
+    background: none repeat scroll 0 0 #EEFFEE;
+    border: 2px solid #008000;
+}
+.bad {
+    background: none repeat scroll 0 0 #FFEEEE;
+    border: 2px solid #FF0000;
 }
 

@@ -4,11 +4,20 @@
     <link rel="stylesheet" href="lib/codemirror.css">
     <script src="lib/codemirror.js"></script>
     <script src="lib/jquery.js"></script>
+    <script src="lib/jison.js"></script>
     <script src="main.js"></script>
     <link rel="stylesheet" href="index.css">
 </head>
 <body>
     <table width="100%">
+    <tr>
+        <td>
+            <button id="process_btn">Generate Parser</button>
+        </td>
+        <td>
+            <!--button id="parse_btn">Parse</button-->
+        </td>
+    </tr>
     <tr>
         <td width="50%">
             <textarea id="taGrammar"></textarea>
