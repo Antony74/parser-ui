@@ -20,8 +20,9 @@ $(document).ready(function()
     
     function hightlightSyntax(lexer, types, cm)
     {
+        cm.setValue(cm.getValue()); // Clear away any previous syntax highlighting
+
         lexer.setInput(cm.getValue());
-//        jQuery('#tokens').html('');
 
         while (!lexer.done)
         {
@@ -61,7 +62,6 @@ $(document).ready(function()
     /* What follows is based on http://zaach.github.io/jison/try/ */
 
     $("#process_btn").click(processGrammar);
-//    $("#parse_btn").click(runParser); 
 
     function processGrammar()
     {
