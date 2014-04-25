@@ -79,13 +79,16 @@ $(document).ready(function()
 
         var grammar = cmGrammar.getValue();
 
-        try
+        var regxOpenBrace = new RegExp("^[ \t\r\n]*{");
+
+        if (regxOpenBrace.test(grammar))
         {
-            var cfg = JSON.parse(grammar);
+            // The first non-whitespace character is an open-brace, assume this grammar is in JSON format
 
             try
             {
                 hightlightSyntax(jsonLexer, cmGrammar);
+                var cfg = JSON.parse(grammar);
             }
             catch(e)
             {
@@ -93,19 +96,19 @@ $(document).ready(function()
                 $("#taOutput").next().addClass('bad');
                 return;
             }
-
         }
-        catch(e)
+        else
         {
+            // The first non-whitespace character is not an open-brace, assume this grammar is in EBNF format 
+
             try
             {
-                var cfg = bnf.parse(grammar);
-
                 hightlightSyntax(lex.lexer, cmGrammar);
+                var cfg = bnf.parse(grammar);
             }
             catch (e)
             {
-                cmOutput.setValue("Oops. Make sure your grammar is in the correct format.");
+                cmOutput.setValue(e.toString());
                 $("#taOutput").next().addClass('bad');
                 return;
             }
@@ -136,7 +139,17 @@ $(document).ready(function()
 
         parser2 = parser.createParser();
 
-        hightlightSyntax(parser.lexer, cmParseMe);
+        try
+        {
+            hightlightSyntax(parser.lexer, cmParseMe);
+        }
+        catch (e)
+        {
+            cmOutput.setValue(cmOutput.getValue() + "\r\n\r\n" + e.toString());
+            $("#taOutput").next().addClass('bad');
+            return;
+        }
+
     }
 
 });
