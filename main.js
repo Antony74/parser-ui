@@ -18,7 +18,7 @@ $(document).ready(function()
     $("#taParseMe").next().addClass("SourceEditor");
     $("#taOutput").next().addClass("OutputWindow");
     
-    function hightlightSyntax(lexer, types, cm)
+    function hightlightSyntax(lexer, cm)
     {
         cm.setValue(cm.getValue()); // Clear away any previous syntax highlighting
 
@@ -29,6 +29,11 @@ $(document).ready(function()
             var typeId = lexer.lex();
 
             var colorClass = "Black";
+
+            if (typeof typeId == "string")
+            {
+                typeId = typeId.length;
+            }
 
             switch(typeId % 6)
             {
@@ -72,6 +77,18 @@ $(document).ready(function()
         try
         {
             var cfg = JSON.parse(grammar);
+
+            try
+            {
+                hightlightSyntax(jsonLexer, cmGrammar);
+            }
+            catch(e)
+            {
+                cmOutput.setValue(e.toString());
+                $("#taOutput").next().addClass('bad');
+                return;
+            }
+
         }
         catch(e)
         {
@@ -79,7 +96,7 @@ $(document).ready(function()
             {
                 var cfg = bnf.parse(grammar);
 
-                hightlightSyntax(lex.lexer, lex.terminals_, cmGrammar);
+                hightlightSyntax(lex.lexer, cmGrammar);
             }
             catch (e)
             {
@@ -114,7 +131,7 @@ $(document).ready(function()
 
         parser2 = parser.createParser();
 
-        hightlightSyntax(parser.lexer, parser.terminals_, cmParseMe);
+        hightlightSyntax(parser.lexer, cmParseMe);
     }
 
 });
