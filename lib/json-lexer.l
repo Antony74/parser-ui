@@ -1,14 +1,13 @@
 /*
+
+A JSON lexer used and only suitable for syntax-highlighting
+
+A very crude port of http://code.google.com/p/json-simple/wiki/Lexer
+
 usage:	npm install -g jison-lex
 		jison-lex json-lexer.l
 */
 
-HEX_D			[a-fA-F0-9]
-INT				[-]?[0-9]+
-DOUBLE			{INT}((\.[0-9]+)?([eE][-+]?[0-9]+)?)
-WS				[ \t\r\n]
-UNESCAPED_CH	[^\"\\]
-FALLBACK_CH		.
 
 %s STRING_BEGIN
 
@@ -24,7 +23,7 @@ FALLBACK_CH		.
 <STRING_BEGIN>"\\n"					return 'LF';
 <STRING_BEGIN>"\\r"					return 'CR';
 <STRING_BEGIN>"\\t"					return 'TAB';
-<STRING_BEGIN>"\\u{HEX_D}{HEX_D}{HEX_D}{HEX_D}"	return 'ESCAPEDCHAR';
+<STRING_BEGIN>"\\u[a-fA-F0-9][a-fA-F0-9][a-fA-F0-9][a-fA-F0-9]"	return 'ESCAPEDCHAR';
 <STRING_BEGIN>"\\"					return 'BACKSLASH';
 
 "\"" 										this.pushState('STRING_BEGIN'); return 'QUOTE';
