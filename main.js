@@ -21,6 +21,11 @@ $(document).ready(function()
     function hightlightSyntax(lexer, cm)
     {
         cm.setValue(cm.getValue()); // Clear away any previous syntax highlighting
+        
+        // Mark everything grey, since anything left untokenised doesn't do anything and thus is by definition a comment 
+        cm.doc.markText({line: 0, ch: 0},
+                        {line: cm.lastLine() + 1,  ch: 0},
+                        {className: "Grey"});
 
         lexer.setInput(cm.getValue());
 
