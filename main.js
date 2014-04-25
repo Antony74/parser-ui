@@ -78,6 +78,8 @@ $(document).ready(function()
             try
             {
                 var cfg = bnf.parse(grammar);
+
+                hightlightSyntax(lex.lexer, lex.terminals_, cmGrammar);
             }
             catch (e)
             {
