@@ -109,7 +109,7 @@ $(document).ready(function()
             catch (e)
             {
                 cmOutput.setValue(e.toString());
-                $("#taOutput").next().addClass('bad');
+                $("#taOutput").next().removeClass('good').addClass('bad');
                 return;
             }
         }
@@ -122,12 +122,12 @@ $(document).ready(function()
         if (!parser.conflicts)
         {
             cmOutput.setValue('Generated successfully!');
-            $("#taOutput").next().addClass('good');
+            $("#taOutput").next().removeClass('bad').addClass('good');
         }
         else
         {
             cmOutput.setValue('Conflicts encountered:\n');
-            $("#taOutput").next().addClass('bad');
+            $("#taOutput").next().removeClass('good').addClass('bad');
         }
 
         parser.resolutions.forEach(function (res)
@@ -142,11 +142,12 @@ $(document).ready(function()
         try
         {
             hightlightSyntax(parser.lexer, cmParseMe);
+            parser2.parse(cmParseMe.getValue());
         }
         catch (e)
         {
             cmOutput.setValue(cmOutput.getValue() + "\r\n\r\n" + e.toString());
-            $("#taOutput").next().addClass('bad');
+            $("#taOutput").next().removeClass('good').addClass('bad');
             return;
         }
 
