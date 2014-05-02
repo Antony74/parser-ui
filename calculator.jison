@@ -38,23 +38,23 @@ expressions
 
 e
     : e '+' e
-        {$$ = $1+$3;}
+		{$$ = {symbol:'PLUS', value: $1.value + $3.value, children:[$1, {symbol:'+'}, $3]};}
     | e '-' e
-        {$$ = $1-$3;}
+		{$$ = {symbol:'SUB',  value: $1.value - $3.value, children:[$1, {symbol:'-'}, $3]};}
     | e '*' e
-        {$$ = $1*$3;}
+		{$$ = {symbol:'MULT', value: $1.value * $3.value, children:[$1, {symbol:'*'}, $3]};}
     | e '/' e
-        {$$ = $1/$3;}
+		{$$ = {symbol:'DIV',  value: $1.value / $3.value, children:[$1, {symbol:'/'}, $3]};}
     | e '^' e
-        {$$ = Math.pow($1, $3);}
+		{$$ = {symbol:'POW', value: Math.pow($1.value, $3.value), children:[$1, {symbol:'^'}, $3]};}
     | '-' e %prec UMINUS
-        {$$ = -$2;}
+		{$$ = {symbol:'NEG', value: -$2.value, children:[{symbol:'-'}, $2]};}
     | '(' e ')'
-        {$$ = $2;}
+        {$$ = {symbol:'BRACKET', value: $2.value, children:[{symbol:'('}, $2, {symbol:')'}]};}
     | NUMBER
-        {$$ = Number(yytext);}
+        {$$ = {symbol:'NUMBER', value:Number(yytext)};}
     | E
-        {$$ = Math.E;}
+        {$$ = {symbol:'E', value:Math.E};}
     | PI
-        {$$ = Math.PI;}
+        {$$ = {symbol:'PI', value:Math.PI};}
     ;

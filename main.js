@@ -142,7 +142,8 @@ $(document).ready(function()
         try
         {
             hightlightSyntax(parser.lexer, cmParseMe);
-            parser2.parse(cmParseMe.getValue());
+            var output = parser2.parse(cmParseMe.getValue());
+            cmOutput.setValue(cmOutput.getValue() + "\r\n\r\n" + JSON.stringify(output, undefined, 2));
         }
         catch (e)
         {
